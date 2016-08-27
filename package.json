@@ -1,0 +1,37 @@
+{
+  "name": "myfirstdraft",
+  "version": "1.0.0",
+  "description": "A web application that connects the creative writing community, share and post drafts of stories, poems, or articles via doc or PDF file, comment and provide feedback to others drafts, and sign up or post events such as author readings and writing workshops in your local area. ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwiebelt002/MyFirstDraft.git"
+  },
+  "author": "Devin J. Wiebelt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwiebelt002/MyFirstDraft/issues"
+  },
+  "homepage": "https://github.com/dwiebelt002/MyFirstDraft#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0",
+    "mysql": "^2.11.1",
+    "orchestrate": "^0.8.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-github2": "^0.1.10",
+    "passport-google": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4"
+  }
+}
