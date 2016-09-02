@@ -33,6 +33,8 @@
     "passport-github2": "^0.1.10",
     "passport-google": "^0.3.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
   }
 }
