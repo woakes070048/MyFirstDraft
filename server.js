@@ -87,12 +87,12 @@ app.set('view engine', 'handlebars');
 //===============ROUTES=================
 //displays our homepage
 app.get('/', function(req, res){
-  res.render('home', {user: req.user});
+  res.render('index', {user: req.user});
 });
 
-//displays our signup page
-app.get('/signin', function(req, res){
-  res.render('signin');
+//displays our register page
+app.get('/register', function(req, res){
+  res.render('register');
 });
 
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
