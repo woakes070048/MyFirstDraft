@@ -1,31 +1,13 @@
-CREATE DATABASE profiles_db;
+drop database if exists dbUsers;
 
-USE profiles_db;
+create database if not exists dbUsers;
 
-CREATE TABLE users(
-    id int NOT NULL AUTO_INCREMENT,
-    first_name varchar(255),
-    last_name varchar(255),
-    photo varchar(255),
-    email varchar(255),
-    phone_number varchar(255),
-    college_university varchar(255),
-    genre varchar(255),
-    PRIMARY KEY (id)
-);
+use dbUsers;
 
-CREATE TABLE drafts(
- 
-);
+drop table if exists tblUsers;
 
-CREATE TABLE comments(
-
-);
-
-CREATE TABLE `users_table` (
-  `userId` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `username` (`username`)
-);
+create table if not exists tblUsers(
+   userId integer primary key auto_increment,
+   username varchar(100) unique,
+   password varchar(100)
+)

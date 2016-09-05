@@ -99,6 +99,10 @@ app.get('/profile', function(req, res){
   res.render('profile');
 });
 
+app.get('/draft', function(req, res){
+  res.render('draft');
+});
+
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
 app.post('/local-reg', passport.authenticate('local-signup', {
   successRedirect: '/',
