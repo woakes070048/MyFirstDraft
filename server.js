@@ -1,150 +1,87 @@
-//Dependecies
 var express = require('express');
-var exphbs = require('express-handlebars');
-var logger = require('morgan');
-var methodOverride = require('method-override');
+var path = require('path');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-var path = require('path');
-var passport = require('passport');
-var localStrategy = require('passport-local');
-var twitterStrategy = require('passport-twitter');
-var facebookStrategy = require('passport-facebook');
-var googleStrategy = require('passport-google');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
+var expressValidator = require('express-validator');
 var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/loginapp');
+var db = mongoose.connection;
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+// Init App
 var app = express();
-var orm = require('./config/orm.js');
 
-//============== NOTE: not sure if both of these are needed ===================
-//Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(__dirname + '/public'));
+// View Engine
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', exphbs({defaultLayout:'layout'}));
+app.set('view engine', 'handlebars');
 
-// BodyParser interprets data sent to the server
+// BodyParser Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({type:'application/vnd.api+json'}));
-
-// cookie parser for user authentication
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// session configuration
+
+// Set Static Folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Express Session
 app.use(session({
-	secret: 'myfirstdraft',
-	cookie: { maxAge: 100000 },
-	resave: true,
-	saveUninitialized: true,
- } ));
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
 
-//===============PASSPORT===============
-
-//This section will contain our work with Passport
-
-// use passport authentication middleware 
+// Passport init
 app.use(passport.initialize());
 app.use(passport.session());
 
-//flash is used to show a message on an incorrect login
+// Express Validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+// Connect Flash
 app.use(flash());
 
-//===============EXPRESS================
-// Configure Express
-app.use(logger('combined'));
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(methodOverride('X-HTTP-Method-Override'));
-app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Session-persisted message middleware
-app.use(function(req, res, next){
-  var err = req.session.error,
-      msg = req.session.notice,
-      success = req.session.success;
-
-  delete req.session.error;
-  delete req.session.success;
-  delete req.session.notice;
-
-  if (err) res.locals.error = err;
-  if (msg) res.locals.notice = msg;
-  if (success) res.locals.success = success;
-
+// Global Vars
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
   next();
 });
 
-// Configure express to use handlebars templates
-var hbs = exphbs.create({
-    defaultLayout: 'main', //we will be creating this layout shortly
-});
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
 
 
-//===============ROUTES=================
-//displays our homepage
-app.get('/', function(req, res){
-  res.render('index', {user: req.user});
-});
+app.use('/', routes);
+app.use('/users', users);
 
-//displays our register page
-app.get('/register', function(req, res){
-  res.render('register');
-});
+// Set Port
+app.set('port', (process.env.PORT || 3000));
 
-//displays profile page
-app.get('/profile', function(req, res){
-  res.render('profile');
-});
-
-//displays where drafts can be read and commented on
-app.get('/draft', function(req, res){
-  res.render('draft');
-});
-
-//displays the frequently asked questions page
-app.get('/faq', function(req, res){
-  res.render('faq');
-});
-
-//displays the forum page
-app.get('/forum', function(req, res){
-  res.render('forum');
-});
-
-
-//sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
-app.post('/local-reg', passport.authenticate('local-signup', {
-  successRedirect: '/profile',
-  failureRedirect: '/signin'
-  })
-);
-
-//sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
-app.post('/login', passport.authenticate('local-signin', {
-  successRedirect: '/profile',
-  failureRedirect: '/signin'
-  })
-);
-
-//logs user out of site, deleting them from the session, and returns to homepage
-app.get('/logout', function(req, res){
-  var name = req.user.username;
-  console.log("LOGGIN OUT " + req.user.username)
-  req.logout();
-  res.redirect('/');
-  req.session.notice = "You have successfully been logged out " + name + "!";
-});
-
-
-
-//===========PORT=====================
-
-var PORT = process.env.PORT || 8000;
-
-app.listen(PORT, function() {
-    console.log("Listening on %d", PORT);
+app.listen(app.get('port'), function(){
+	console.log('Server started on port '+app.get('port'));
 });

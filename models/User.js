@@ -1,17 +1,46 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var orm = require('../db/orm.js');
+var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
-function User (userObj) {
-	this.username = userObj.username
-	this.password = userObj.password
+// User Schema
+var UserSchema = mongoose.Schema({
+	username: {
+		type: String,
+		index:true
+	},
+	password: {
+		type: String
+	},
+	email: {
+		type: String
+	},
+	name: {
+		type: String
+	}
+});
+
+var User = module.exports = mongoose.model('User', UserSchema);
+
+module.exports.createUser = function(newUser, callback){
+	bcrypt.genSalt(10, function(err, salt) {
+	    bcrypt.hash(newUser.password, salt, function(err, hash) {
+	        newUser.password = hash;
+	        newUser.save(callback);
+	    });
+	});
 }
 
-module.exports = User
+module.exports.getUserByUsername = function(username, callback){
+	var query = {username: username};
+	User.findOne(query, callback);
+}
 
-module.exports.saveUser = function(userObj, callback){
-	orm.addUserToDB(userObj, function(status, err){
-		if (err) return callback(false);
-		callback(true);
+module.exports.getUserById = function(id, callback){
+	User.findById(id, callback);
+}
+
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+	bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+    	if(err) throw err;
+    	callback(null, isMatch);
 	});
 }
