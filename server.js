@@ -15,6 +15,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 var app = express();
+var orm = require('./config/orm.js');
 
 //============== NOTE: not sure if both of these are needed ===================
 //Serve static content for the app from the "public" directory in the application directory.
@@ -39,7 +40,6 @@ app.use(session({
 //===============PASSPORT===============
 
 //This section will contain our work with Passport
-
 
 // use passport authentication middleware 
 app.use(passport.initialize());
@@ -95,24 +95,37 @@ app.get('/register', function(req, res){
   res.render('register');
 });
 
+//displays profile page
 app.get('/profile', function(req, res){
   res.render('profile');
 });
 
+//displays where drafts can be read and commented on
 app.get('/draft', function(req, res){
   res.render('draft');
 });
 
+//displays the frequently asked questions page
+app.get('/faq', function(req, res){
+  res.render('faq');
+});
+
+//displays the forum page
+app.get('/forum', function(req, res){
+  res.render('forum');
+});
+
+
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
 app.post('/local-reg', passport.authenticate('local-signup', {
-  successRedirect: '/',
+  successRedirect: '/profile',
   failureRedirect: '/signin'
   })
 );
 
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
 app.post('/login', passport.authenticate('local-signin', {
-  successRedirect: '/',
+  successRedirect: '/profile',
   failureRedirect: '/signin'
   })
 );
@@ -125,6 +138,8 @@ app.get('/logout', function(req, res){
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";
 });
+
+
 
 //===========PORT=====================
 

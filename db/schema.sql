@@ -8,6 +8,6 @@ drop table if exists tblUsers;
 
 create table if not exists tblUsers(
    userId integer primary key auto_increment,
-   username varchar(100) unique,
+   email varchar(100) unique,
    password varchar(100)
 )
