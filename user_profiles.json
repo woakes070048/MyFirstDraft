@@ -1,0 +1,38 @@
+{
+         "username":"spidey",
+         "id":00001,
+         "email":"peterparker@dailybugle.com",
+         "imageUrl":"http://vignette3.wikia.nocookie.net/marvelmovies/images/9/99/Peter_Parker.jpg/revision/latest?cb=20080414075452",
+         "location":"New York, NY",
+         "age":18,
+         "name":"Peter Parker",
+         "birthdate":"August 26, 1998",
+         "college":"Empire State University",
+},
+
+{
+         "username":"gothamknight",
+         "id":00002,
+         "email":"bruce@wayneindustries.com",
+         "imageUrl":"http://img2.timeinc.net/people/i/2011/database/111010/ben-affleck-300.jpg",
+         "location":"Gotham City, GC",
+         "age":46,
+         "name":"Bruce Wayne",
+         "birthdate":"October 2, 1970",
+         "college":"University of Gotham",
+},
+
+{
+         "username":"manofsteel",
+         "id":00003,
+         "email":"clarkkent@thedailyplanet.com",
+         "imageUrl":"http://henrycavill.org/images/Films/2014-Man-from-UNCLE/posters/Character-N.jpg",
+         "location":"Smallville, KS",
+         "age":34,
+         "name":"Clark Kent",
+         "birthdate":"October 2, 1982",
+         "college":"Smallville Community College",
+},
+
+
+

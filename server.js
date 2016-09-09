@@ -74,13 +74,36 @@ app.use(function (req, res, next) {
   next();
 });
 
+//===============ROUTES=================
+
+
+//displays where drafts can be read and commented on
+app.get('/draft', function(req, res){
+  res.render('draft');
+});
+
+//displays the frequently asked questions page
+app.get('/faq', function(req, res){
+  res.render('faq');
+});
+
+//displays the forum page
+app.get('/forum', function(req, res){
+  res.render('forum');
+});
+
+//displays the page where users can add thier story drafts
+app.get('/addDraft', function(req, res){
+  res.render('addDraft');
+});
+
 
 
 app.use('/', routes);
 app.use('/users', users);
 
 // Set Port
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 8080));
 
 app.listen(app.get('port'), function(){
 	console.log('Server started on port '+app.get('port'));

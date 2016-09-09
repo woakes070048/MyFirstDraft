@@ -1,87 +1,98 @@
-/* Space out content a bit */
+
+//====================================================================================================
+
+@CHARSET "UTF-8";
+/*
+over-ride "Weak" message, show font in dark grey
+*/
+
+.progress-bar {
+    color: #333;
+} 
+
+/*
+Reference:
+http://www.bootstrapzen.com/item/135/simple-login-form-logo/
+*/
+
+* {
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: none;
+}
+
+    .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    @include box-sizing(border-box);
+
+    &:focus {
+      z-index: 2;
+    }
+  }
+
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  background: url(http://cdn.boltmedia.co/wp-content/uploads/2015/11/Writers-live-twice.jpg?51b209) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-right: 15px;
-  padding-left: 15px;
+.login-form {
+  margin-top: 60px;
 }
 
-/* Custom page header */
-.header {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e5e5e5;
+form[role=login] {
+  color: #5d5d5d;
+  background: #f2f2f2;
+  padding: 26px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
 }
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
+  form[role=login] img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 35px;
   }
-}
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
+  form[role=login] input,
+  form[role=login] button {
+    font-size: 18px;
+    margin: 16px 0;
+  }
+  form[role=login] > div {
+    text-align: center;
+  }
+  
+.form-links {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+  margin-top: 1em;
+  margin-bottom: 50px;
 }
-.jumbotron .btn {
-  padding: 14px 24px;
-  font-size: 21px;
+  .form-links a {
+    color: #fff;
+  }
+
+//====================================================================================
+
+body{padding-top:30px;}
+
+.glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+small {
+display: block;
+line-height: 1.428571429;
+color: #999;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
-
-.page-header{
-  margin-top:0;
-}
+//============================================================================================
 
 footer{
-  margin-top:40px;
+  margin-top:80px;
 }
+
+//==========================================================================================

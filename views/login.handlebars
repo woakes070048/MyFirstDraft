@@ -1,16 +1,51 @@
-<h2 class="page-header">Account Login</h2>
-<form method="post" action="/users/login">
-  <div class="form-group">
+<!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <script src="js/login.js"></script>
 
-    <label>Username</label>
-    <input type="text" class="form-control" name="username" placeholder="Username">
+<br>
+<br>
+<br>
+
+    <!-- login -->
+     <div class="container">
+  
+     <div class="row" id="pwd-container">
+        <div class="col-md-4"></div>
+    
+    <div class="col-md-4">
+      <section class="login-form">
+        <form method="post" action="#" role="login">
+        <h3>Share, Review, and Write</h3>
+        <p>Get connected with our community today!</p>
+          <img src="" class="img-responsive" alt="" />
+
+          <input type="text" class="form-control" name="username" placeholder="Username">
+          
+          <input type="password" class="form-control" name="password" placeholder="Password">
+          
+          <div class="pwstrength_viewport_progress"></div>
+          
+          
+          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
+          <div>
+            <a href="/register">Create account</a>
+          </div>
+          
+        </form>
+        
+        
+      </section>  
+      </div>
+      
+      <div class="col-md-4"></div>
+      
+
   </div>
+  
+ <br>
+ <br>
+ <br>
 
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password">
+</div>
 
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-
-</form>
