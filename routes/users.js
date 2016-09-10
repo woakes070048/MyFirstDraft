@@ -3,6 +3,9 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+//This piece of code is preventing heroku from uploading properly 
+//prevents proper login/registration for user auth once commented out
+
 //var User = require('../models/user');
 
 // Register
