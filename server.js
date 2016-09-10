@@ -30,6 +30,14 @@ if (process.env.MONGODB_URI) {
 //-----------End Database config--------------------------------------------------------------
 var db = mongoose.connection;
 
+db.on('error', function(err) {
+  console.log('Mongoose Error ', err);
+});
+
+db.once('open', function(err) {
+  console.log("Mongoose connection successful.");
+});
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
