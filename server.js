@@ -23,7 +23,7 @@ if (process.env.MONGODB_URI) {
 
 } else {
 
-  mongoose.connect(databaseUri)
+  mongoose.connect(databaseUri);
 }
 
 
