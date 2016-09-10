@@ -35,7 +35,7 @@
                         <div class="container">
                             <div class="btn-group" role="group" aria-label="...">
                             {{#if user}}
-                                        <button type="button" a href="" class="btn btn-default">Edit Info</button>
+                                        <button type="button" a href="/" class="btn btn-default">Edit Info</button>
                                         <button type="button" class="btn btn-default">Change Profile Picture</button>
                                         <button type="button" class="btn btn-default">Reply to comments</button>
                             {{else}}
@@ -69,12 +69,18 @@
     <br>
 
     <div class="container">
-
+    <a href="/addDraft">
         <button type="button" class="btn btn-lg btn-primary">Add New Draft</button>
-        
+    </a> 
+
+    <a href="/editDraft">
         <button type="button" class="btn btn-lg btn-primary">Edit Existing Draft</button>
-        
+    </a>
+
+    <a href="/draft">
         <button type="button" class="btn btn-lg btn-primary">View Drafts</button>
+    </a>
+    
     </div>
 
     <br>

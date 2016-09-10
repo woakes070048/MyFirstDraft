@@ -10,10 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <div class="container">
-<h2>Bootstrap File upload demo</h2>
+<div class="well well-md">
+                <div class="row">
+
+<h2>Upload your story here</h2>
     <div class="col-xs-4">
         <div class="form-group">
-        <label class="control-label">A file upload button without icon</label>
-        <input type="file" class="filestyle" data-icon="false">
+        <form action="demo_form.asp" id="usrform">
+  				Name: <input type="text" name="usrname">
+  									<input type="submit">
+  									<textarea name="comment" form="usrform">Enter text here...</textarea>
+		</form>
+
     </div>
 </div>
+

@@ -11,7 +11,23 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/loginapp');
+
+//-------------Database configuration with Mongoose------------------------
+// mongoose.connect('mongodb://localhost/loginapp');
+
+
+var databaseUri = 'mongodb://localhost/loginapp';
+
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI);
+
+} else {
+
+  mongoose.connect(databaseUri)
+}
+
+
+//-----------End Database config--------------------------------------------------------------
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
@@ -101,6 +117,9 @@ app.get('/addDraft', function(req, res){
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+
 
 // Set Port
 app.set('port', (process.env.PORT || 8080));
